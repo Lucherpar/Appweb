@@ -1,0 +1,17 @@
+body {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36) 0%, rgba(9,9,121) 35%, rgba(0,212,212,1) 100%); /*degradado lineal*/
+    color: white;
+}
+
+
+#mensaje{
+    color: red;
+    font-weight: bold;
+    font-style: italic;
+    display: none;
+}
+img{
+    width: 300px;
+    border-radius: 15px;
+}
