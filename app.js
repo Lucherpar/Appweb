@@ -1,3 +1,20 @@
+//Creamos Array de jugadores vacia
+let players = null
+
+function GetPlayers(){
+    fetch("players.json")
+        .then(function(resp){
+            return resp.json()
+        }).then(function(respJSON){
+            players = respJSON
+        }).catch(function(error){
+            console.log(error)
+        })
+}
+
+        //cargar jugadores desde el JSON
+GetPlayers()
+
 function validarDatos(e){
     //Suspender el envio de datos al servidor
     //Pero manteniendo la validación en el FROM HTML
@@ -11,18 +28,35 @@ function validarDatos(e){
     if(!txtJugador.value.match(/[a-z]/) || !txtJugador.value.match(/[A-Z]/) || !txtJugador.value.match(/\d/)){
         Swal.fire({
             title: "Error!!!",
-            text: "Error de validación",
+            text: "El nombre del jugador no es correcto",
             icon: "error"
         });
         document.getElementById("mensaje").style.display = "block"
+        document.getElementById("mensajeAlta").style.display = "none"
     }else {
         //TODO BIEN VALIDADO
-        Swal.fire({
-            title: "Bienvenido!!",
-            text: txtJugador.value,
-            icon: "success"
-        });
-        document.getElementById("mensaje").style.display = "none"
+        //Búsqueda del jugador en el array de jugadores
+        for(let player of players){
+            if(player.nombre == txtJugador.value){
+                //Encontrado jugador
+                    Swal.fire({
+                        title: "Error!!!",
+                        text: "El jugador ya existe en el registro de jugadores. No lo puedo dar de alta",
+                        icon: "error"
+                    });
+                    document.getElementById("mensajeAlta").style.display = "none"
+                break
+            }else{
+                //No existe el jugador
+                Swal.fire({
+                    title: "Bienvenido!!",
+                    text: txtJugador.value,
+                    icon: "success"
+                });
+                document.getElementById("mensajeAlta").style.display = "block"
+                document.getElementById("mensaje").style.display = "none"
+            }
+        }
     }
 
 }

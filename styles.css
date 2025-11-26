@@ -11,6 +11,9 @@ body {
     font-style: italic;
     display: none;
 }
+#mensajeAlta {
+    color: green;
+}
 img{
     width: 300px;
     border-radius: 15px;
